@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="page1">
+        <h1>Totally Trivial Trivia</h1>
+        <button id="start">start</button>
+    </section>
+    <section id="page2" style="display:none">
+
+        <h1>Totally Trivial Trivia</h1>
+        <p id="number">Time remaining</p>
+        <form>
+            <p>What is your name</p>
+            <input type="radio" name="name7" value="mike">mike</input>
+            <input type="radio" name="name7" value="smith">smith</input>
+
+
+            <p>What is your age</p>
+            <input type="radio" name="age" value="30">30</input>
+            <input type="radio" name="age" value="33">33</input>
+            <input type="submit" value="done"></input>
+
+        </form>
+
+    </section>
+    <section id="page3" style="display:none">
+
+        <h1>Totally Trivial Trivia</h1>
+        <p>All done!</p>
+        <p id="correct">correct answer:</p>
+        <p id="incorrect">Incorrect answer</p>
+        <p id="unanswer">Unanswer</p>
+    </section>
+    <script>
+        var correctanswer = 0;
+        var incorrectanswer = 0;
+        var unanswer = 0;
+        var number = 0;
+        function mytimer() {
+           
+            if (number == 0) {
+                $("form").submit();
+                number -= 1;
+            }
+            $("#number").text(number);
+
+        }                
+
+        $(document).ready(function () {
+            $("#start").click(function () {
+                $("#page1").hide();
+                $("#page2").show();
+                setInterval(mytimer, 1000)
+
+            });
+
+            $("form").submit(function (event) {
+                event.preventDefault();
+                var name = $("input[type=radio][name=name7]:checked").val();
+                if (name === "mike") {
+                    correctanswer += 1;
+                }
+                else if (name == undefined) {
+                    unanswer += 1;
+
+                }
+                else {
+                    incorrectanswer += 1;
+                }
+
+                var age = $("input[type=radio][name=age]:checked").val();
+                if (age === "30") {
+                    correctanswer += 1;
+                }
+                else if (age == undefined) {
+                    unanswer += 1;
+
+                }
+                else {
+                    incorrectanswer += 1;
+
+                }
+                console.log(name)
+                console.log(age)
+
+                $("#page2").hide();
+                $("#page3").show();
+                $("#correct").text(correctanswer);
+                $("#incorrect").text(incorrectanswer);
+                $("#unanswer").text(unanswer);
+
+
+            })
+
+        });
+
+    </script>
+</body>
+
+</html>
