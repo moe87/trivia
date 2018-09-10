@@ -45,12 +45,12 @@
         var correctanswer = 0;
         var incorrectanswer = 0;
         var unanswer = 0;
-        var number = 0;
+        var number = 30;
         function mytimer() {
-           
+            number -= 1;
             if (number == 0) {
                 $("form").submit();
-                number -= 1;
+               
             }
             $("#number").text(number);
 
